@@ -2,15 +2,8 @@ name: Daily Batch (Fetch → Pair → Judge)
 
 on:
   schedule:
-    # UTC 06:00 = JST 15:00（NY市場開始前、PH投稿が出揃った後）
     - cron: '0 6 * * *'
-  workflow_dispatch: # 手動実行も可能
-
-env:
-  PH_DEVELOPER_TOKEN: ${{ secrets.PH_DEVELOPER_TOKEN }}
-  GITHUB_TOKEN: ${{ secrets.GH_PAT }}
-  SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-  SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+  workflow_dispatch:
 
 jobs:
   batch:
@@ -20,10 +13,17 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Create env file
+        run: |
+          echo "PH_DEVELOPER_TOKEN=${{ secrets.PH_DEVELOPER_TOKEN }}" >> .env.local
+          echo "GITHUB_TOKEN=${{ secrets.GH_PAT }}" >> .env.local
+          echo "SUPABASE_URL=${{ secrets.SUPABASE_URL }}" >> .env.local
+          echo "SUPABASE_SERVICE_KEY=${{ secrets.SUPABASE_SERVICE_KEY }}" >> .env.local
 
       - name: Step 1 - Fetch products from Product Hunt + GitHub
         run: npx tsx scripts/fetch-products.ts
