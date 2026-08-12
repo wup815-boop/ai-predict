@@ -26,6 +26,7 @@ export default function Home() {
   const { data: session, status } = useSession();
   const [pairs, setPairs] = useState<Pair[]>([]);
   const [totalCount, setTotalCount] = useState(0);
+  const [totalActive, setTotalActive] = useState(0);
   const [answeredCount, setAnsweredCount] = useState(0);
   const [loading, setLoading] = useState(true);
   const [selectedPick, setSelectedPick] = useState<"a" | "b" | null>(null);
@@ -44,6 +45,7 @@ export default function Home() {
         const fetched = d.pairs || [];
         setPairs(fetched);
         setTotalCount(fetched.length);
+        setTotalActive(d.total_active ?? fetched.length);
         setAnsweredCount(0);
       })
       .finally(() => setLoading(false));
@@ -128,10 +130,10 @@ export default function Home() {
         <div className="flex flex-col items-center justify-center px-4 py-24 text-center">
           <div className="text-4xl mb-3">🎉</div>
           <h1 className="text-xl font-bold mb-2">
-            {totalCount > 0 ? "すべて予測済みです" : "本日のペアはまだありません"}
+            {totalActive > 0 ? "すべて予測済みです" : "本日のペアはまだありません"}
           </h1>
           <p className="text-sm text-gray-400">
-            {totalCount > 0
+            {totalActive > 0
               ? "結果は判定日に「結果」ページで確認できます。"
               : "毎日15:00頃に新しいペアが登場します"}
           </p>

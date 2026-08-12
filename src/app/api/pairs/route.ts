@@ -38,7 +38,7 @@ export async function GET(req: NextRequest) {
   }
 
   if (!userId) {
-    return NextResponse.json({ pairs });
+    return NextResponse.json({ pairs, total_active: (pairs ?? []).length });
   }
 
   const { data: predicted, error: predictedError } = await supabase
@@ -53,5 +53,5 @@ export async function GET(req: NextRequest) {
   const predictedIds = new Set((predicted ?? []).map((p) => p.pair_id));
   const unansweredPairs = (pairs ?? []).filter((p) => !predictedIds.has(p.id));
 
-  return NextResponse.json({ pairs: unansweredPairs });
+  return NextResponse.json({ pairs: unansweredPairs, total_active: (pairs ?? []).length });
 }
