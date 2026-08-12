@@ -16,22 +16,27 @@ const handler = NextAuth({
   ],
   callbacks: {
     async signIn({ user }) {
-      // Supabaseにユーザーを保存（初回のみ）
-      const { error } = await supabase.from("users").upsert(
-        {
-          id: user.id,
-          email: user.email,
-          display_name: user.name,
-          auth_provider: "google",
-        },
-        { onConflict: "email" }
-      );
-      return !error;
+      try {
+        const { data: existing } = await supabase
+          .from("users")
+          .select("id")
+          .eq("email", user.email)
+          .single();
+
+        if (!existing) {
+          await supabase.from("users").insert({
+            email: user.email,
+            display_name: user.name,
+            auth_provider: "google",
+          });
+        }
+        return true;
+      } catch {
+        return true;
+      }
     },
-    async session({ session, token }) {
-      // セッションにユーザーIDを追加
-      if (session.user) {
-        // emailからDB上のIDを取得
+    async session({ session }) {
+      if (session.user?.email) {
         const { data } = await supabase
           .from("users")
           .select("id")
@@ -43,9 +48,6 @@ const handler = NextAuth({
       }
       return session;
     },
-  },
-  pages: {
-    signIn: "/login",
   },
 });
 
