@@ -19,6 +19,9 @@ export default function LoginPage() {
         <p className="text-xs text-gray-400 mt-4">
           予測履歴を保存するためにログインが必要です
         </p>
+        <p className="text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2 mt-4">
+          ※ 現在テスト版のため、ログインできない場合はお問い合わせください
+        </p>
       </div>
     </main>
   );

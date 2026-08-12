@@ -46,7 +46,16 @@ export default function ResultsPage() {
         {loading && <p className="text-gray-500">Loading...</p>}
 
         {!loading && results.length === 0 && (
-          <p className="text-gray-500">まだ判定済みのペアはありません。30日後に最初の結果が出ます。</p>
+          <div className="bg-white rounded-2xl border p-6 text-center">
+            <div className="text-3xl mb-2">⏳</div>
+            <p className="text-gray-700 font-medium mb-1">まだ判定済みの結果はありません</p>
+            <p className="text-sm text-gray-400">
+              トップページでA/Bを予測すると、30日後にGitHub Starsの増加率で自動判定され、ここに結果が表示されます。
+            </p>
+            <a href="/" className="inline-block mt-4 text-sm text-blue-600 font-medium hover:underline">
+              予測する →
+            </a>
+          </div>
         )}
 
         {results.map((r) => (

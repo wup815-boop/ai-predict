@@ -61,18 +61,38 @@ export default function Home() {
 
   if (!session) {
     return (
-      <main className="min-h-[100dvh] flex items-center justify-center bg-gray-50 px-4">
+      <main className="min-h-[100dvh] flex items-center justify-center bg-gray-50 px-4 py-10">
         <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border max-w-sm w-full text-center">
           <h1 className="text-2xl font-bold mb-2">AI Predict</h1>
           <p className="text-gray-500 text-sm mb-6">
-            AIプロダクトの成長を予測して目利き履歴を残す
+            新しいAIプロダクトの成長を予測して目利き履歴を残す
           </p>
+
+          <ul className="text-left text-sm text-gray-600 space-y-2.5 mb-6">
+            <li className="flex items-center gap-2.5">
+              <span className="text-base">👆</span>
+              1タップで予測
+            </li>
+            <li className="flex items-center gap-2.5">
+              <span className="text-base">📅</span>
+              30日後に自動判定
+            </li>
+            <li className="flex items-center gap-2.5">
+              <span className="text-base">🤖</span>
+              AIと正解率を比較
+            </li>
+          </ul>
+
           <button
             onClick={() => signIn("google")}
             className="w-full bg-blue-600 text-white py-3.5 px-4 rounded-xl font-medium hover:bg-blue-700 active:scale-[0.98] transition-all"
           >
             Googleでログイン
           </button>
+
+          <p className="text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2 mt-4">
+            ※ 現在テスト版のため、ログインできない場合はお問い合わせください
+          </p>
         </div>
       </main>
     );

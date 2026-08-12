@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useSession } from "next-auth/react";
+import { useSession, signIn } from "next-auth/react";
 
 interface Stats {
   user: { total_predictions: number; judged_count: number; correct_count: number; accuracy_pct: number };
@@ -46,10 +46,35 @@ export default function HistoryPage() {
         {loading && <p className="text-gray-500">Loading...</p>}
 
         {!loading && !session && (
-          <p className="text-gray-500">ログインすると履歴が表示されます。</p>
+          <div className="bg-white rounded-2xl border p-6 text-center">
+            <div className="text-3xl mb-2">🔒</div>
+            <p className="text-gray-700 font-medium mb-1">ログインすると履歴が表示されます</p>
+            <p className="text-sm text-gray-400 mb-4">
+              予測数・正解率・AIとの比較など、あなたの目利き成績をここで確認できます。
+            </p>
+            <button
+              onClick={() => signIn("google")}
+              className="bg-blue-600 text-white text-sm py-2.5 px-5 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+            >
+              Googleでログイン
+            </button>
+          </div>
         )}
 
-        {!loading && stats && (
+        {!loading && stats && u && u.total_predictions === 0 && (
+          <div className="bg-white rounded-2xl border p-6 text-center">
+            <div className="text-3xl mb-2">🔮</div>
+            <p className="text-gray-700 font-medium mb-1">まだ予測がありません</p>
+            <p className="text-sm text-gray-400">
+              トップページでA/Bを予測すると、ここに予測数・正解率・AIとの比較が記録されます。
+            </p>
+            <a href="/" className="inline-block mt-4 text-sm text-blue-600 font-medium hover:underline">
+              予測する →
+            </a>
+          </div>
+        )}
+
+        {!loading && stats && u && u.total_predictions > 0 && (
           <>
             {/* Stats comparison */}
             <div className="grid grid-cols-2 gap-3 mb-6">
