@@ -117,7 +117,7 @@ export default function Home() {
               number={3}
               emoji="🤖"
               title="AIと正解率を比較"
-              description="あなたの目利きとAI予想、どちらが当たるか競います"
+              description="あなたの予想とAI、どちらが当たるか競います"
             />
           </div>
 

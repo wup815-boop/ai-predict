@@ -45,7 +45,7 @@ export default function HistoryPage() {
       </header>
 
       <div className="max-w-lg mx-auto px-4 py-6">
-        <h2 className="text-xl font-bold mb-4 text-content">あなたの目利き履歴</h2>
+        <h2 className="text-xl font-bold mb-4 text-content">予想履歴</h2>
 
         {loading && <p className="text-faint text-sm">読み込み中...</p>}
 
@@ -54,7 +54,7 @@ export default function HistoryPage() {
             <div className="text-3xl mb-2">🔒</div>
             <p className="text-content font-medium mb-1">ログインすると履歴が表示されます</p>
             <p className="text-sm text-muted mb-4">
-              予想数・正解率・AIとの比較など、あなたの目利き成績をここで確認できます。
+              予想数・正解率・AIとの比較など、あなたの予想成績をここで確認できます。
             </p>
             <button
               onClick={() => signIn("google")}
