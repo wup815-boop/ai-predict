@@ -2,9 +2,9 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "AI Predict - AIプロダクト成長予測",
+    name: "AI Predict - AIプロダクト成長予想",
     short_name: "AI Predict",
-    description: "2つのAIプロダクト、どちらが伸びる？30日後にGitHub Starsで答え合わせ",
+    description: "新しいAIプロダクトの成長を予想して、AIと腕を競う",
     start_url: "/",
     display: "standalone",
     background_color: "#f9fafb",

@@ -50,7 +50,7 @@ export default function HistoryPage() {
             <div className="text-3xl mb-2">🔒</div>
             <p className="text-gray-700 font-medium mb-1">ログインすると履歴が表示されます</p>
             <p className="text-sm text-gray-400 mb-4">
-              予測数・正解率・AIとの比較など、あなたの目利き成績をここで確認できます。
+              予想数・正解率・AIとの比較など、あなたの目利き成績をここで確認できます。
             </p>
             <button
               onClick={() => signIn("google")}
@@ -64,12 +64,12 @@ export default function HistoryPage() {
         {!loading && stats && u && u.total_predictions === 0 && (
           <div className="bg-white rounded-2xl border p-6 text-center">
             <div className="text-3xl mb-2">🔮</div>
-            <p className="text-gray-700 font-medium mb-1">まだ予測がありません</p>
+            <p className="text-gray-700 font-medium mb-1">まだ予想がありません</p>
             <p className="text-sm text-gray-400">
-              トップページでA/Bを予測すると、ここに予測数・正解率・AIとの比較が記録されます。
+              トップページでA/Bを予想すると、ここに予想数・正解率・AIとの比較が記録されます。
             </p>
             <a href="/" className="inline-block mt-4 text-sm text-blue-600 font-medium hover:underline">
-              予測する →
+              予想する →
             </a>
           </div>
         )}
@@ -95,14 +95,14 @@ export default function HistoryPage() {
               <div className={`rounded-xl p-4 mb-6 text-center text-sm font-medium ${
                 beating ? "bg-green-50 text-green-700" : "bg-gray-100 text-gray-600"
               }`}>
-                {beating ? "🎯 AIを上回っています！" : "AIの方が上です。予測を続けましょう。"}
+                {beating ? "🎯 AIを上回っています！" : "AIの方が上です。予想を続けましょう。"}
               </div>
             )}
 
             {/* Summary */}
             <div className="bg-white rounded-xl border p-4 mb-6">
               <div className="flex justify-between text-sm py-2 border-b">
-                <span className="text-gray-500">予測数</span>
+                <span className="text-gray-500">予想数</span>
                 <span className="font-medium">{u?.total_predictions || 0}</span>
               </div>
               <div className="flex justify-between text-sm py-2 border-b">
@@ -118,7 +118,7 @@ export default function HistoryPage() {
             {/* Recent */}
             {stats.recent && stats.recent.length > 0 && (
               <>
-                <h3 className="text-sm font-bold text-gray-700 mb-2">最近の予測</h3>
+                <h3 className="text-sm font-bold text-gray-700 mb-2">最近の予想</h3>
                 {stats.recent.map((r: any, i: number) => (
                   <div key={i} className="bg-white rounded-lg border p-3 mb-2 text-sm">
                     <div className="flex justify-between">
@@ -133,7 +133,7 @@ export default function HistoryPage() {
                       </span>
                     </div>
                     <div className="text-xs text-gray-400 mt-1">
-                      予測: {r.pick.toUpperCase()} · {new Date(r.created_at).toLocaleDateString("ja-JP")}
+                      予想: {r.pick.toUpperCase()} · {new Date(r.created_at).toLocaleDateString("ja-JP")}
                     </div>
                   </div>
                 ))}

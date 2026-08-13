@@ -50,10 +50,10 @@ export default function ResultsPage() {
             <div className="text-3xl mb-2">⏳</div>
             <p className="text-gray-700 font-medium mb-1">まだ判定済みの結果はありません</p>
             <p className="text-sm text-gray-400">
-              トップページでA/Bを予測すると、30日後にGitHub Starsの増加率で自動判定され、ここに結果が表示されます。
+              トップページでA/Bを予想すると、30日後にGitHub Starsの増加率で自動判定され、ここに結果が表示されます。
             </p>
             <a href="/" className="inline-block mt-4 text-sm text-blue-600 font-medium hover:underline">
-              予測する →
+              予想する →
             </a>
           </div>
         )}

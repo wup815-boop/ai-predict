@@ -84,7 +84,7 @@ export default function Home() {
         <div className="max-w-lg mx-auto px-4 pt-14 pb-8 text-center">
           <h1 className="text-3xl sm:text-4xl font-bold mb-3">AI Predict</h1>
           <p className="text-gray-500 text-base mb-8">
-            新しいAIプロダクトの成長を予測して目利き履歴を残す
+            新しいAIプロダクトの成長を予想して、AIと腕を競う
           </p>
           <button
             onClick={() => signIn("google")}
@@ -104,7 +104,7 @@ export default function Home() {
             <StepItem
               number={1}
               emoji="👆"
-              title="1タップで予測"
+              title="1タップで予想"
               description="毎日届く2つのAIプロダクトのうち、伸びる方をタップするだけ"
             />
             <StepItem
@@ -117,12 +117,12 @@ export default function Home() {
               number={3}
               emoji="🤖"
               title="AIと正解率を比較"
-              description="あなたの目利きとAI予測、どちらが当たるか競います"
+              description="あなたの目利きとAI予想、どちらが当たるか競います"
             />
           </div>
 
           {/* Sample preview */}
-          <h2 className="text-lg font-bold text-center mb-1">こんな画面で予測します</h2>
+          <h2 className="text-lg font-bold text-center mb-1">こんな画面で予想します</h2>
           <p className="text-center text-sm text-gray-400 mb-4">
             30日後、どちらのGitHub Starsがより伸びる?（サンプル）
           </p>
@@ -151,7 +151,7 @@ export default function Home() {
               onClick={() => signIn("google")}
               className="w-full sm:w-auto sm:px-10 bg-blue-600 text-white py-3.5 px-4 rounded-xl font-medium hover:bg-blue-700 active:scale-[0.98] transition-all"
             >
-              Googleでログインして予測を始める
+              Googleでログインして予想する
             </button>
           </div>
         </div>
@@ -211,7 +211,7 @@ export default function Home() {
         <div className="flex flex-col items-center justify-center px-4 py-24 text-center">
           <div className="text-4xl mb-3">🎉</div>
           <h1 className="text-xl font-bold mb-2">
-            {totalActive > 0 ? "すべて予測済みです" : "本日のペアはまだありません"}
+            {totalActive > 0 ? "すべて予想済みです" : "本日のペアはまだありません"}
           </h1>
           <p className="text-sm text-gray-400">
             {totalActive > 0
@@ -410,7 +410,7 @@ function FeedbackBanner({
           選択を記録中...
         </>
       ) : (
-        <>予測を記録しました。結果は {new Date(judgeAfter).toLocaleDateString("ja-JP")} に判定されます。</>
+        <>予想を記録しました。結果は {new Date(judgeAfter).toLocaleDateString("ja-JP")} に判定されます。</>
       )}
     </p>
   );
