@@ -226,8 +226,15 @@ export default function Home() {
     <main className="min-h-[100dvh] bg-base pb-10">
       <SiteHeader />
 
+      {/* 説明 */}
+      <div className="max-w-lg mx-auto px-4 pt-4 pb-2">
+        <p className="text-sm text-muted text-center">
+          2つのAIプロダクトのうち、30日後にGitHub Starsがより伸びる方をタップで予想。結果は自動判定され、AIと正解率を競えます。
+        </p>
+      </div>
+
       {/* Progress bar */}
-      <div className="max-w-lg mx-auto px-4 pt-4">
+      <div className="max-w-lg mx-auto px-4">
         <div className="flex items-center justify-between text-xs text-faint mb-1.5">
           <span>
             {answeredCount + 1} / {totalCount}
