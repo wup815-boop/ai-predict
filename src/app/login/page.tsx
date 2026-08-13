@@ -38,7 +38,7 @@ export default function LoginPage() {
 
         <p className="text-xs text-faint mt-4">予想履歴を保存するためにログインが必要です</p>
         <p className="text-xs text-warn bg-base border border-line rounded-lg px-3 py-2 mt-4">
-          ※ 現在テスト版のため、ログインできない場合はお問い合わせください
+          ※ 現在テスト版のため、ログインできない場合があります
         </p>
       </div>
     </main>

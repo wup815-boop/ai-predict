@@ -93,7 +93,7 @@ export default function Home() {
             Googleでログインして始める
           </button>
           <p className="text-xs text-warn bg-card border border-line rounded-lg px-3 py-2 mt-4 inline-block">
-            ※ 現在テスト版のため、ログインできない場合はお問い合わせください
+            ※ 現在テスト版のため、ログインできない場合があります
           </p>
         </div>
 
