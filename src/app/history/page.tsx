@@ -10,11 +10,12 @@ interface Stats {
 }
 
 export default function HistoryPage() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [stats, setStats] = useState<Stats | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (status === "loading") return;
     const userId = (session?.user as any)?.id;
     if (!userId) { setLoading(false); return; }
 
@@ -22,7 +23,7 @@ export default function HistoryPage() {
       .then((r) => r.json())
       .then((d) => setStats(d))
       .finally(() => setLoading(false));
-  }, [session]);
+  }, [status, session]);
 
   const u = stats?.user;
   const ai = stats?.ai;
