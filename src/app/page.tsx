@@ -387,9 +387,22 @@ function ProductCard({
           </h2>
           <p className="text-sm text-muted mt-1 line-clamp-2">{product.tagline}</p>
         </div>
-        <span className="text-xs sm:text-sm text-faint whitespace-nowrap shrink-0">
-          ★ {product.stars_at_fetch.toLocaleString()}
-        </span>
+        <div className="flex flex-col items-end gap-1.5 shrink-0">
+          <span className="text-xs sm:text-sm text-faint whitespace-nowrap">
+            ★ {product.stars_at_fetch.toLocaleString()}
+          </span>
+          {product.github_url && (
+            <a
+              href={product.github_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="text-[11px] text-muted hover:text-accent transition-colors flex items-center gap-0.5"
+            >
+              GitHub ↗
+            </a>
+          )}
+        </div>
       </div>
     </button>
   );

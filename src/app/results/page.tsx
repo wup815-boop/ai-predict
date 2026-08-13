@@ -9,8 +9,8 @@ interface Result {
   a_growth_pct: number;
   b_growth_pct: number;
   winner: string;
-  product_a: { name: string };
-  product_b: { name: string };
+  product_a: { name: string; github_url?: string };
+  product_b: { name: string; github_url?: string };
   ai_predictions: { pick: string; is_correct: boolean }[];
   my_prediction: { pick: string; is_correct: boolean } | null;
 }
@@ -78,12 +78,14 @@ export default function ResultsPage() {
                 <GrowthRow
                   label="A"
                   name={r.product_a.name}
+                  githubUrl={r.product_a.github_url}
                   pct={r.a_growth_pct}
                   won={aWon}
                 />
                 <GrowthRow
                   label="B"
                   name={r.product_b.name}
+                  githubUrl={r.product_b.github_url}
                   pct={r.b_growth_pct}
                   won={bWon}
                 />
@@ -112,11 +114,13 @@ export default function ResultsPage() {
 function GrowthRow({
   label,
   name,
+  githubUrl,
   pct,
   won,
 }: {
   label: "A" | "B";
   name: string;
+  githubUrl?: string;
   pct: number;
   won: boolean;
 }) {
@@ -135,6 +139,16 @@ function GrowthRow({
         >
           {name}
         </span>
+        {githubUrl && (
+          <a
+            href={githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="shrink-0 text-[11px] text-muted hover:text-accent transition-colors"
+          >
+            ↗
+          </a>
+        )}
       </div>
       <span
         className={`text-sm font-bold whitespace-nowrap ${won ? "text-success" : "text-faint"}`}
