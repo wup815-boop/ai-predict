@@ -22,6 +22,24 @@ interface Pair {
 
 type FeedbackStatus = "idle" | "saving" | "saved" | "error";
 
+const SAMPLE_PRODUCT_A: Product = {
+  id: "sample-a",
+  name: "PromptForge",
+  tagline: "AIプロンプトをチームで管理・共有できるワークスペース",
+  ph_url: "",
+  github_url: "",
+  stars_at_fetch: 1240,
+};
+
+const SAMPLE_PRODUCT_B: Product = {
+  id: "sample-b",
+  name: "VectorNest",
+  tagline: "軽量ベクターDBをエッジで動かす開発者向けツール",
+  ph_url: "",
+  github_url: "",
+  stars_at_fetch: 890,
+};
+
 export default function Home() {
   const { data: session, status } = useSession();
   const [pairs, setPairs] = useState<Pair[]>([]);
@@ -61,38 +79,81 @@ export default function Home() {
 
   if (!session) {
     return (
-      <main className="min-h-[100dvh] flex items-center justify-center bg-gray-50 px-4 py-10">
-        <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border max-w-sm w-full text-center">
-          <h1 className="text-2xl font-bold mb-2">AI Predict</h1>
-          <p className="text-gray-500 text-sm mb-6">
+      <main className="min-h-[100dvh] bg-gray-50">
+        {/* Hero */}
+        <div className="max-w-lg mx-auto px-4 pt-14 pb-8 text-center">
+          <h1 className="text-3xl sm:text-4xl font-bold mb-3">AI Predict</h1>
+          <p className="text-gray-500 text-base mb-8">
             新しいAIプロダクトの成長を予測して目利き履歴を残す
           </p>
-
-          <ul className="text-left text-sm text-gray-600 space-y-2.5 mb-6">
-            <li className="flex items-center gap-2.5">
-              <span className="text-base">👆</span>
-              1タップで予測
-            </li>
-            <li className="flex items-center gap-2.5">
-              <span className="text-base">📅</span>
-              30日後に自動判定
-            </li>
-            <li className="flex items-center gap-2.5">
-              <span className="text-base">🤖</span>
-              AIと正解率を比較
-            </li>
-          </ul>
-
           <button
             onClick={() => signIn("google")}
-            className="w-full bg-blue-600 text-white py-3.5 px-4 rounded-xl font-medium hover:bg-blue-700 active:scale-[0.98] transition-all"
+            className="w-full sm:w-auto sm:px-10 bg-blue-600 text-white py-3.5 px-4 rounded-xl font-medium hover:bg-blue-700 active:scale-[0.98] transition-all"
           >
-            Googleでログイン
+            Googleでログインして始める
           </button>
-
-          <p className="text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2 mt-4">
+          <p className="text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2 mt-4 inline-block">
             ※ 現在テスト版のため、ログインできない場合はお問い合わせください
           </p>
+        </div>
+
+        {/* How it works */}
+        <div className="max-w-lg mx-auto px-4 pb-10">
+          <h2 className="text-lg font-bold text-center mb-5">使い方は3ステップ</h2>
+          <div className="space-y-3 mb-12">
+            <StepItem
+              number={1}
+              emoji="👆"
+              title="1タップで予測"
+              description="毎日届く2つのAIプロダクトのうち、伸びる方をタップするだけ"
+            />
+            <StepItem
+              number={2}
+              emoji="📅"
+              title="30日後に自動判定"
+              description="GitHub Starsの増加率で自動的に勝敗が決まります"
+            />
+            <StepItem
+              number={3}
+              emoji="🤖"
+              title="AIと正解率を比較"
+              description="あなたの目利きとAI予測、どちらが当たるか競います"
+            />
+          </div>
+
+          {/* Sample preview */}
+          <h2 className="text-lg font-bold text-center mb-1">こんな画面で予測します</h2>
+          <p className="text-center text-sm text-gray-400 mb-4">
+            30日後、どちらのGitHub Starsがより伸びる?（サンプル）
+          </p>
+          <div className="flex flex-col gap-3">
+            <ProductCard
+              label="A"
+              product={SAMPLE_PRODUCT_A}
+              state="idle"
+              onClick={() => signIn("google")}
+            />
+            <div className="flex items-center justify-center py-0.5">
+              <span className="text-xs font-bold text-gray-400 bg-gray-100 border border-gray-200 rounded-full w-8 h-8 flex items-center justify-center">
+                VS
+              </span>
+            </div>
+            <ProductCard
+              label="B"
+              product={SAMPLE_PRODUCT_B}
+              state="idle"
+              onClick={() => signIn("google")}
+            />
+          </div>
+
+          <div className="text-center mt-10">
+            <button
+              onClick={() => signIn("google")}
+              className="w-full sm:w-auto sm:px-10 bg-blue-600 text-white py-3.5 px-4 rounded-xl font-medium hover:bg-blue-700 active:scale-[0.98] transition-all"
+            >
+              Googleでログインして予測を始める
+            </button>
+          </div>
         </div>
       </main>
     );
@@ -219,6 +280,33 @@ export default function Home() {
         判定日まで30日 · GitHub Stars増加率で自動判定
       </footer>
     </main>
+  );
+}
+
+function StepItem({
+  number,
+  emoji,
+  title,
+  description,
+}: {
+  number: number;
+  emoji: string;
+  title: string;
+  description: string;
+}) {
+  return (
+    <div className="flex items-start gap-3 bg-white rounded-xl border p-4">
+      <div className="shrink-0 w-8 h-8 rounded-full bg-blue-600 text-white text-sm font-bold flex items-center justify-center">
+        {number}
+      </div>
+      <div>
+        <p className="font-medium text-gray-900 flex items-center gap-1.5">
+          <span>{emoji}</span>
+          {title}
+        </p>
+        <p className="text-sm text-gray-500 mt-0.5">{description}</p>
+      </div>
+    </div>
   );
 }
 

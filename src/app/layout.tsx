@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import Providers from "@/components/Providers";
 
@@ -17,6 +17,15 @@ export const metadata: Metadata = {
     title: "AI Predict - AIプロダクト成長予測",
     description: "2つのAIプロダクト、どちらが伸びる？30日後にGitHub Starsで答え合わせ",
   },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "AI Predict",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#2563eb",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

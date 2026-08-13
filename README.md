@@ -12,6 +12,7 @@
 | **Product Hunt** | https://www.producthunt.com/v2/oauth/applications | Developer Token を生成 |
 | **GitHub PAT** | https://github.com/settings/tokens | `public_repo` スコープのみ |
 | **Vercel** | https://vercel.com | GitHubアカウントで連携 |
+| **Resend** | https://resend.com | 週次結果通知メール用。API Keyを発行（独自ドメイン検証まではonboarding@resend.dev送信元のみ） |
 
 ### 2. Supabase DB作成
 
@@ -33,7 +34,8 @@ npm run dev          # Next.js開発サーバー
 npm run fetch        # Product Hunt → GitHub → DB
 npm run pair         # ペア作成 + AI予測
 npm run judge        # 30日経過ペアの判定
-npm run batch        # 上記3つを順番に実行
+npm run notify       # 直近7日で判定されたペアの結果をメール通知（週次）
+npm run batch        # fetch → pair → judge を順番に実行
 ```
 
 ### 5. デプロイ
@@ -41,7 +43,7 @@ npm run batch        # 上記3つを順番に実行
 - GitHubにpush
 - Vercelでインポート
 - 環境変数を設定
-- GitHub Actions の Secrets に同じ変数を設定
+- GitHub Actions の Secrets に同じ変数を設定（`daily-batch.yml` 用に加え、`weekly-notify.yml` 用に `RESEND_API_KEY` / `EMAIL_FROM` / `NEXTAUTH_URL` も設定）
 
 ## プロジェクト構造
 

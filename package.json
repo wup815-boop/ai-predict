@@ -9,15 +9,17 @@
     "fetch": "tsx scripts/fetch-products.ts",
     "pair": "tsx scripts/create-pairs.ts",
     "judge": "tsx scripts/judge-pairs.ts",
+    "notify": "tsx scripts/notify-results.ts",
     "batch": "npm run fetch && npm run pair && npm run judge"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.45.0",
     "@supabase/ssr": "^0.5.0",
+    "@supabase/supabase-js": "^2.45.0",
     "next": "^14.2.0",
     "next-auth": "^4.24.0",
     "react": "^18.3.0",
-    "react-dom": "^18.3.0"
+    "react-dom": "^18.3.0",
+    "resend": "^4.8.0"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",

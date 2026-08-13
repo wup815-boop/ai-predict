@@ -1,0 +1,30 @@
+name: Weekly Result Notification Email
+
+on:
+  schedule:
+    # UTC 00:00 Mon = JST 09:00 Mon
+    - cron: '0 0 * * 1'
+  workflow_dispatch: # 手動実行も可能
+
+env:
+  SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+  SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+  NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
+  RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+  EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Send weekly result notification emails
+        run: npx tsx scripts/notify-results.ts
