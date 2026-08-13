@@ -1,7 +1,7 @@
 /**
  * generate-pwa-icons.js
  *
- * ブランドカラー(#2563EB)の背景に、成長比較を表す2本の白いバーを描いた
+ * アクセントカラー(#16A085)の背景に、成長比較を表す2本の白いバーを描いた
  * シンプルなPWAアイコンを生成する。外部画像・依存ライブラリなしでPNGを
  * 直接エンコードする（Node標準のzlibのみ使用）。
  *
@@ -63,7 +63,7 @@ function encodePNG(width, height, rgba) {
 
 function drawIcon(size) {
   const buf = Buffer.alloc(size * size * 4);
-  const [br, bg, bb] = [37, 99, 235]; // #2563EB
+  const [br, bg, bb] = [22, 160, 133]; // #16A085
   for (let i = 0; i < size * size; i++) {
     buf[i * 4] = br;
     buf[i * 4 + 1] = bg;

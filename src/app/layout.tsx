@@ -25,13 +25,13 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#2563eb",
+  themeColor: "#0D1B2A",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ja">
-      <body className="antialiased">
+      <body className="antialiased bg-base text-content">
         <Providers>{children}</Providers>
       </body>
     </html>

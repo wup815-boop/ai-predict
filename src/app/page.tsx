@@ -71,35 +71,35 @@ export default function Home() {
 
   if (status === "loading") {
     return (
-      <main className="min-h-screen flex items-center justify-center px-4">
-        <p className="text-gray-400 text-sm">読み込み中...</p>
+      <main className="min-h-[100dvh] bg-base flex items-center justify-center px-4">
+        <p className="text-faint text-sm">読み込み中...</p>
       </main>
     );
   }
 
   if (!session) {
     return (
-      <main className="min-h-[100dvh] bg-gray-50">
+      <main className="min-h-[100dvh] bg-base">
         {/* Hero */}
         <div className="max-w-lg mx-auto px-4 pt-14 pb-8 text-center">
-          <h1 className="text-3xl sm:text-4xl font-bold mb-3">AI Predict</h1>
-          <p className="text-gray-500 text-base mb-8">
+          <h1 className="text-3xl sm:text-4xl font-bold mb-3 text-content">AI Predict</h1>
+          <p className="text-muted text-base mb-8">
             新しいAIプロダクトの成長を予想して、AIと腕を競う
           </p>
           <button
             onClick={() => signIn("google")}
-            className="w-full sm:w-auto sm:px-10 bg-blue-600 text-white py-3.5 px-4 rounded-xl font-medium hover:bg-blue-700 active:scale-[0.98] transition-all"
+            className="w-full sm:w-auto sm:px-10 bg-accent text-white py-3.5 px-4 rounded-xl font-medium hover:bg-accent-hover active:scale-[0.98] transition-all"
           >
             Googleでログインして始める
           </button>
-          <p className="text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2 mt-4 inline-block">
+          <p className="text-xs text-warn bg-card border border-line rounded-lg px-3 py-2 mt-4 inline-block">
             ※ 現在テスト版のため、ログインできない場合はお問い合わせください
           </p>
         </div>
 
         {/* How it works */}
         <div className="max-w-lg mx-auto px-4 pb-10">
-          <h2 className="text-lg font-bold text-center mb-5">使い方は3ステップ</h2>
+          <h2 className="text-lg font-bold text-center mb-5 text-content">使い方は3ステップ</h2>
           <div className="space-y-3 mb-12">
             <StepItem
               number={1}
@@ -122,8 +122,8 @@ export default function Home() {
           </div>
 
           {/* Sample preview */}
-          <h2 className="text-lg font-bold text-center mb-1">こんな画面で予想します</h2>
-          <p className="text-center text-sm text-gray-400 mb-4">
+          <h2 className="text-lg font-bold text-center mb-1 text-content">こんな画面で予想します</h2>
+          <p className="text-center text-sm text-faint mb-4">
             30日後、どちらのGitHub Starsがより伸びる?（サンプル）
           </p>
           <div className="flex flex-col gap-3">
@@ -133,11 +133,7 @@ export default function Home() {
               state="idle"
               onClick={() => signIn("google")}
             />
-            <div className="flex items-center justify-center py-0.5">
-              <span className="text-xs font-bold text-gray-400 bg-gray-100 border border-gray-200 rounded-full w-8 h-8 flex items-center justify-center">
-                VS
-              </span>
-            </div>
+            <VsBadge />
             <ProductCard
               label="B"
               product={SAMPLE_PRODUCT_B}
@@ -149,7 +145,7 @@ export default function Home() {
           <div className="text-center mt-10">
             <button
               onClick={() => signIn("google")}
-              className="w-full sm:w-auto sm:px-10 bg-blue-600 text-white py-3.5 px-4 rounded-xl font-medium hover:bg-blue-700 active:scale-[0.98] transition-all"
+              className="w-full sm:w-auto sm:px-10 bg-accent text-white py-3.5 px-4 rounded-xl font-medium hover:bg-accent-hover active:scale-[0.98] transition-all"
             >
               Googleでログインして予想する
             </button>
@@ -198,22 +194,22 @@ export default function Home() {
 
   if (loading) {
     return (
-      <main className="min-h-screen flex items-center justify-center px-4">
-        <p className="text-gray-400 text-sm">読み込み中...</p>
+      <main className="min-h-[100dvh] bg-base flex items-center justify-center px-4">
+        <p className="text-faint text-sm">読み込み中...</p>
       </main>
     );
   }
 
   if (pairs.length === 0) {
     return (
-      <main className="min-h-[100dvh] bg-gray-50">
+      <main className="min-h-[100dvh] bg-base">
         <SiteHeader />
         <div className="flex flex-col items-center justify-center px-4 py-24 text-center">
           <div className="text-4xl mb-3">🎉</div>
-          <h1 className="text-xl font-bold mb-2">
+          <h1 className="text-xl font-bold mb-2 text-content">
             {totalActive > 0 ? "すべて予想済みです" : "本日のペアはまだありません"}
           </h1>
-          <p className="text-sm text-gray-400">
+          <p className="text-sm text-muted">
             {totalActive > 0
               ? "結果は判定日に「結果」ページで確認できます。"
               : "毎日15:00頃に新しいペアが登場します"}
@@ -227,26 +223,26 @@ export default function Home() {
   const remaining = pairs.length;
 
   return (
-    <main className="min-h-[100dvh] bg-gray-50 pb-10">
+    <main className="min-h-[100dvh] bg-base pb-10">
       <SiteHeader />
 
       {/* Progress bar */}
       <div className="max-w-lg mx-auto px-4 pt-4">
-        <div className="flex items-center justify-between text-xs text-gray-400 mb-1.5">
+        <div className="flex items-center justify-between text-xs text-faint mb-1.5">
           <span>
             {answeredCount + 1} / {totalCount}
           </span>
           <span>残り {remaining} 件</span>
         </div>
-        <div className="h-1.5 w-full bg-gray-200 rounded-full overflow-hidden">
+        <div className="h-1.5 w-full bg-line rounded-full overflow-hidden">
           <div
-            className="h-full bg-blue-500 rounded-full transition-all duration-500"
+            className="h-full bg-accent rounded-full transition-all duration-500"
             style={{ width: `${progressPct}%` }}
           />
         </div>
       </div>
 
-      <p className="text-center text-gray-700 text-sm sm:text-base mt-6 mb-4 px-4">
+      <p className="text-center text-content text-sm sm:text-base mt-6 mb-4 px-4">
         30日後、どちらのGitHub Starsがより伸びる?
       </p>
 
@@ -258,11 +254,7 @@ export default function Home() {
           onClick={() => handlePick("a")}
         />
 
-        <div className="flex items-center justify-center py-0.5">
-          <span className="text-xs font-bold text-gray-400 bg-gray-100 border border-gray-200 rounded-full w-8 h-8 flex items-center justify-center">
-            VS
-          </span>
-        </div>
+        <VsBadge />
 
         <ProductCard
           label="B"
@@ -276,10 +268,23 @@ export default function Home() {
         <FeedbackBanner status={feedbackStatus} judgeAfter={pair.judge_after} />
       </div>
 
-      <footer className="text-center text-xs text-gray-300 mt-10 pb-6 px-4">
+      {/* フッター: 仕様の #2C3E50 は区切り線に使用。文字を #2C3E50 にすると
+          背景 #0D1B2A に対しコントラスト比1.58となり判読できないため、
+          文字色は仕様の「テキスト薄い」#576574 を使う。 */}
+      <footer className="max-w-lg mx-auto mt-10 pt-4 pb-6 px-4 border-t border-steel text-center text-xs text-faint">
         判定日まで30日 · GitHub Stars増加率で自動判定
       </footer>
     </main>
+  );
+}
+
+function VsBadge() {
+  return (
+    <div className="flex items-center justify-center py-0.5">
+      <span className="text-xs font-bold text-muted bg-steel rounded-full w-8 h-8 flex items-center justify-center">
+        VS
+      </span>
+    </div>
   );
 }
 
@@ -295,16 +300,16 @@ function StepItem({
   description: string;
 }) {
   return (
-    <div className="flex items-start gap-3 bg-white rounded-xl border p-4">
-      <div className="shrink-0 w-8 h-8 rounded-full bg-blue-600 text-white text-sm font-bold flex items-center justify-center">
+    <div className="flex items-start gap-3 bg-card border border-line rounded-xl p-4">
+      <div className="shrink-0 w-8 h-8 rounded-full bg-accent text-white text-sm font-bold flex items-center justify-center">
         {number}
       </div>
       <div>
-        <p className="font-medium text-gray-900 flex items-center gap-1.5">
+        <p className="font-medium text-content flex items-center gap-1.5">
           <span>{emoji}</span>
           {title}
         </p>
-        <p className="text-sm text-gray-500 mt-0.5">{description}</p>
+        <p className="text-sm text-muted mt-0.5">{description}</p>
       </div>
     </div>
   );
@@ -320,16 +325,19 @@ function cardState(
 
 function SiteHeader() {
   return (
-    <header className="sticky top-0 z-10 bg-white/90 backdrop-blur border-b px-4 py-3 flex items-center justify-between">
-      <h1 className="text-lg font-bold">AI Predict</h1>
+    <header className="sticky top-0 z-10 bg-base/90 backdrop-blur border-b border-line px-4 py-3 flex items-center justify-between">
+      <h1 className="text-lg font-bold text-content">AI Predict</h1>
       <div className="flex items-center gap-3 sm:gap-4 text-sm">
-        <a href="/results" className="text-gray-500 hover:text-gray-900">
+        <a href="/results" className="text-muted hover:text-content transition-colors">
           結果
         </a>
-        <a href="/history" className="text-gray-500 hover:text-gray-900">
+        <a href="/history" className="text-muted hover:text-content transition-colors">
           履歴
         </a>
-        <button onClick={() => signOut()} className="text-gray-400 hover:text-gray-600 text-xs">
+        <button
+          onClick={() => signOut()}
+          className="text-faint hover:text-muted text-xs transition-colors"
+        >
           ログアウト
         </button>
       </div>
@@ -354,14 +362,14 @@ function ProductCard({
       disabled={state !== "idle"}
       className={`relative w-full text-left p-4 sm:p-5 rounded-2xl border-2 transition-all duration-200 ${
         state === "selected"
-          ? "border-green-500 bg-green-50 shadow-md"
+          ? "border-success bg-success-bg"
           : state === "faded"
-          ? "border-gray-200 bg-gray-50 opacity-50"
-          : "border-gray-200 bg-white hover:border-blue-400 hover:shadow-md active:scale-[0.98]"
+          ? "border-line bg-card opacity-40"
+          : "border-line bg-card hover:border-accent active:scale-[0.98]"
       }`}
     >
       {state === "selected" && (
-        <span className="absolute top-3 right-3 sm:top-4 sm:right-4 w-6 h-6 rounded-full bg-green-500 text-white text-xs flex items-center justify-center font-bold">
+        <span className="absolute top-3 right-3 sm:top-4 sm:right-4 w-6 h-6 rounded-full bg-success text-white text-xs flex items-center justify-center font-bold">
           ✓
         </span>
       )}
@@ -369,15 +377,17 @@ function ProductCard({
         <div className="min-w-0">
           <span
             className={`text-xs font-medium uppercase ${
-              state === "selected" ? "text-green-600" : "text-blue-500"
+              state === "selected" ? "text-success" : "text-accent"
             }`}
           >
             {label}
           </span>
-          <h2 className="text-base sm:text-lg font-bold mt-1 truncate">{product.name}</h2>
-          <p className="text-sm text-gray-500 mt-1 line-clamp-2">{product.tagline}</p>
+          <h2 className="text-base sm:text-lg font-bold mt-1 truncate text-content">
+            {product.name}
+          </h2>
+          <p className="text-sm text-muted mt-1 line-clamp-2">{product.tagline}</p>
         </div>
-        <span className="text-xs sm:text-sm text-gray-400 whitespace-nowrap shrink-0">
+        <span className="text-xs sm:text-sm text-faint whitespace-nowrap shrink-0">
           ★ {product.stars_at_fetch.toLocaleString()}
         </span>
       </div>
@@ -396,17 +406,17 @@ function FeedbackBanner({
 
   if (status === "error") {
     return (
-      <p className="text-center text-red-500 text-sm mt-4">
+      <p className="text-center text-danger text-sm mt-4">
         保存に失敗しました。もう一度お試しください。
       </p>
     );
   }
 
   return (
-    <p className="text-center text-green-600 text-sm mt-4 flex items-center justify-center gap-1.5">
+    <p className="text-center text-success text-sm mt-4 flex items-center justify-center gap-1.5">
       {status === "saving" ? (
         <>
-          <span className="inline-block w-3.5 h-3.5 border-2 border-green-500 border-t-transparent rounded-full animate-spin" />
+          <span className="inline-block w-3.5 h-3.5 border-2 border-success border-t-transparent rounded-full animate-spin" />
           選択を記録中...
         </>
       ) : (

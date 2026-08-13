@@ -29,68 +29,146 @@ export default function ResultsPage() {
   }, [session]);
 
   return (
-    <main className="min-h-screen bg-gray-50">
-      <header className="bg-white border-b px-4 py-3 flex items-center justify-between">
+    <main className="min-h-[100dvh] bg-base">
+      <header className="sticky top-0 z-10 bg-base/90 backdrop-blur border-b border-line px-4 py-3 flex items-center justify-between">
         <h1 className="text-lg font-bold">
-          <a href="/" className="hover:text-blue-600">AI Predict</a>
+          <a href="/" className="text-content hover:text-accent transition-colors">
+            AI Predict
+          </a>
         </h1>
         <div className="flex gap-4 text-sm">
-          <span className="text-gray-900 font-medium">結果</span>
-          <a href="/history" className="text-gray-500 hover:text-gray-900">履歴</a>
+          <span className="text-content font-medium">結果</span>
+          <a href="/history" className="text-muted hover:text-content transition-colors">
+            履歴
+          </a>
         </div>
       </header>
 
       <div className="max-w-lg mx-auto px-4 py-6">
-        <h2 className="text-xl font-bold mb-4">判定済みの結果</h2>
+        <h2 className="text-xl font-bold mb-4 text-content">判定済みの結果</h2>
 
-        {loading && <p className="text-gray-500">Loading...</p>}
+        {loading && <p className="text-faint text-sm">読み込み中...</p>}
 
         {!loading && results.length === 0 && (
-          <div className="bg-white rounded-2xl border p-6 text-center">
+          <div className="bg-card border border-line rounded-2xl p-6 text-center">
             <div className="text-3xl mb-2">⏳</div>
-            <p className="text-gray-700 font-medium mb-1">まだ判定済みの結果はありません</p>
-            <p className="text-sm text-gray-400">
+            <p className="text-content font-medium mb-1">まだ判定済みの結果はありません</p>
+            <p className="text-sm text-muted">
               トップページでA/Bを予想すると、30日後にGitHub Starsの増加率で自動判定され、ここに結果が表示されます。
             </p>
-            <a href="/" className="inline-block mt-4 text-sm text-blue-600 font-medium hover:underline">
+            <a
+              href="/"
+              className="inline-block mt-4 text-sm text-accent font-medium hover:underline"
+            >
               予想する →
             </a>
           </div>
         )}
 
-        {results.map((r) => (
-          <div key={r.id} className="bg-white rounded-xl border p-4 mb-3">
-            <div className="flex justify-between items-start mb-2">
-              <div className="text-sm text-gray-400">
+        {results.map((r) => {
+          const aWon = r.winner === "a" || r.winner === "both";
+          const bWon = r.winner === "b" || r.winner === "both";
+          return (
+            <div key={r.id} className="bg-card border border-line rounded-xl p-4 mb-3">
+              <div className="text-xs text-faint mb-3">
                 {new Date(r.judged_at).toLocaleDateString("ja-JP")} 判定
               </div>
-            </div>
 
-            <div className="flex items-center gap-2 mb-2">
-              <span className={`text-sm font-bold ${r.winner === "a" || r.winner === "both" ? "text-green-600" : "text-gray-400"}`}>
-                A: {r.product_a.name} (+{r.a_growth_pct?.toFixed(1)}%)
-              </span>
-              <span className="text-gray-300">vs</span>
-              <span className={`text-sm font-bold ${r.winner === "b" || r.winner === "both" ? "text-green-600" : "text-gray-400"}`}>
-                B: {r.product_b.name} (+{r.b_growth_pct?.toFixed(1)}%)
-              </span>
-            </div>
+              <div className="space-y-2 mb-3">
+                <GrowthRow
+                  label="A"
+                  name={r.product_a.name}
+                  pct={r.a_growth_pct}
+                  won={aWon}
+                />
+                <GrowthRow
+                  label="B"
+                  name={r.product_b.name}
+                  pct={r.b_growth_pct}
+                  won={bWon}
+                />
+              </div>
 
-            <div className="flex gap-4 text-xs">
-              {r.my_prediction && (
-                <span className={r.my_prediction.is_correct ? "text-green-600" : "text-red-500"}>
-                  あなた: {r.my_prediction.pick.toUpperCase()} {r.my_prediction.is_correct ? "✓ 正解" : "✗ 不正解"}
-                </span>
-              )}
-              {r.ai_predictions?.[0] && (
-                <span className={r.ai_predictions[0].is_correct ? "text-green-600" : "text-red-500"}>
-                  AI: {r.ai_predictions[0].pick.toUpperCase()} {r.ai_predictions[0].is_correct ? "✓" : "✗"}
-                </span>
-              )}
+              <div className="flex gap-2 text-xs pt-3 border-t border-line">
+                <VerdictChip
+                  who="あなた"
+                  pick={r.my_prediction?.pick}
+                  isCorrect={r.my_prediction?.is_correct}
+                />
+                <VerdictChip
+                  who="AI"
+                  pick={r.ai_predictions?.[0]?.pick}
+                  isCorrect={r.ai_predictions?.[0]?.is_correct}
+                />
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </main>
+  );
+}
+
+function GrowthRow({
+  label,
+  name,
+  pct,
+  won,
+}: {
+  label: "A" | "B";
+  name: string;
+  pct: number;
+  won: boolean;
+}) {
+  return (
+    <div className="flex items-center justify-between gap-3">
+      <div className="flex items-center gap-2 min-w-0">
+        <span
+          className={`shrink-0 text-[10px] font-bold w-5 h-5 rounded flex items-center justify-center ${
+            won ? "bg-success text-white" : "bg-steel text-muted"
+          }`}
+        >
+          {label}
+        </span>
+        <span
+          className={`text-sm truncate ${won ? "text-content font-medium" : "text-muted"}`}
+        >
+          {name}
+        </span>
+      </div>
+      <span
+        className={`text-sm font-bold whitespace-nowrap ${won ? "text-success" : "text-faint"}`}
+      >
+        +{pct?.toFixed(1)}%
+      </span>
+    </div>
+  );
+}
+
+function VerdictChip({
+  who,
+  pick,
+  isCorrect,
+}: {
+  who: string;
+  pick?: string;
+  isCorrect?: boolean;
+}) {
+  if (!pick) {
+    return (
+      <span className="px-2 py-1 rounded bg-base text-faint">
+        {who}: 予想なし
+      </span>
+    );
+  }
+
+  return (
+    <span
+      className={`px-2 py-1 rounded ${
+        isCorrect ? "bg-success-bg text-success" : "bg-base text-danger"
+      }`}
+    >
+      {who}: {pick.toUpperCase()} {isCorrect ? "✓ 正解" : "✗ 不正解"}
+    </span>
   );
 }

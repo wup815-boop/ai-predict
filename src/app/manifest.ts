@@ -7,8 +7,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: "新しいAIプロダクトの成長を予想して、AIと腕を競う",
     start_url: "/",
     display: "standalone",
-    background_color: "#f9fafb",
-    theme_color: "#2563eb",
+    background_color: "#0D1B2A",
+    theme_color: "#0D1B2A",
     lang: "ja",
     icons: [
       { src: "/icons/icon-192.png", sizes: "192x192", type: "image/png", purpose: "any" },
